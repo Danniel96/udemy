@@ -1,14 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.admin')
 
-    <h1>HI</h1>
+
+
+@section('content')
     
-</body>
-</html>
+    <h1>Users</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Created Date</th>
+                <th>Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @if($users)
+
+            @foreach ($users as $user)
+
+
+            <tr>
+                <td scope="row">{{$user->id}}</td>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
+                <td>{{$user->role->name}}</td>
+                <td>{{$user->is_active == 1 ? 'Active' : 'Not Active'}}</td>
+                <td>{{$user->created_at->diffForHumans()}}</td>
+                <td>{{$user->updated_at->diffForHumans()}}</td>
+            </tr>
+
+            
+            @endforeach
+
+            @endif
+
+        </tbody>
+    </table>
+
+
+@endsection
